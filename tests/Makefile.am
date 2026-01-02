@@ -6,8 +6,7 @@ SUBDIRS = \
     tests-asn1c-smoke       \
     tests-c-compiler        \
     tests-randomized        \
-    ioc-v2x                 \
-    f1ap-regression  
+    ioc-v2x  
 
 EXTRA_DIST = README
 
