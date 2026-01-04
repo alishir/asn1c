@@ -1,3 +1,52 @@
+Changes since v1.2.0:
+
+    FEATURES:
+    * Added XER decoder support for empty OPTIONAL fields via compile-time flag
+      -DXER_ALLOW_EMPTY_OPTIONALS (#416).
+    * Added ENCODING-CONTROL directive parser and type linking for custom
+      XER encoding formats (hexadecimal, base64, utf8) (#389).
+    * Added -fcomplex-threshold command-line option for controlling when types
+      are considered "complex" (#399).
+    * Added -fprefix command-line option for prefixing generated type names (#170).
+    * Added class default syntax support in ASN.1 parser (#172).
+    * Added copy operation support for ASN.1 structures (#174).
+
+    NOTABLE:
+    * IOC constraint resolution now handles SEQUENCE OF with parent field
+      references correctly, fixing IEEE 1609.2 code generation (#415).
+    * Circular dependency detection improved and then reverted to pre-PR-#409
+      state; F1AP regression test infrastructure preserved (#414, #409, #411).
+    * Open Type code generation fixed for SEQUENCE OF in IEEE 1609.2 extension
+      mechanism (#408).
+    * XER parsing now supports X.693 hexadecimal notation H'...' for OCTET
+      STRING (#334).
+    * IOC OPEN_TYPE pointer generation controlled by -findirect-choice flag,
+      fixing F1AP circular dependencies (#353).
+    * -fgen-only-pdu-deps flag now properly handles IOC table traversal and
+      parameterized type dependencies (#336).
+    * Version brackets in CHOICE types now handled correctly (#199).
+    * Documentation updated in asn1c-usage.tex for recent compiler enhancements
+      (#412).
+    * README updated with supported encoding rules (#173).
+
+    FIXES IN COMPILER-GENERATED OUTPUT:
+    * Fixed JER BIT STRING encoding to handle variable size constraints (#192).
+    * Fixed JER OBJECT IDENTIFIER to use proper quote handling (#178).
+    * Fixed JER encoding for pure hexadecimal OCTET STRINGs (#193).
+    * Fixed JER compiler warning -Wsign-compare in BIT_STRING_jer (#200).
+    * Fixed APER CHOICE cast to handle different signedness comparison (#163).
+    * Fixed APER INTEGER encoding to use intmax_t instead of long (#176).
+    * Fixed OER OPEN TYPE encoding issue (#164).
+    * Fixed XER encoding issues and improved OPEN_TYPE handling (#399).
+    * Fixed format specifiers for 64-bit integers across all encoding rules (#185).
+      (Severity: low; Security impact: none)
+
+    FIXES IN TOOLING:
+    * Fixed GCC warnings in generated code (#181).
+    * Fixed integer tests compiler warnings (#182).
+    * Removed unused arguments and variables in JER implementation (#162, #169).
+    * Updated .gitignore to ignore generated smoke tests (#166).
+
 1.2.0:
 	FEATURES:
 	* Added support for OPEN TYPE in IOC, now V2X and C2X should work.
