@@ -12,6 +12,373 @@
 	FIXES:
 	* Numeral - addressed bugs and compiler warnings.
 
+Changes since 1.2.0:
+
+    2026:
+    * PR #416: XER Empty OPTIONAL Fields Support (2026-01-04)
+      - Added compile-time flag -DXER_ALLOW_EMPTY_OPTIONALS for lenient XER decoding
+      - XER decoder now treats empty OPTIONAL fields as absent rather than invalid
+      
+    * PR #415: IOC Constraint Resolution Fix (2026-01-02)
+      - Fixed IOC constraint resolution for SEQUENCE OF with parent field references
+      - Corrected IEEE 1609.2 extension mechanism code generation
+      
+    * PR #414: Circular Dependency Detection Revert (2026-01-02)
+      - Reverted PRs #409 and #411 circular dependency changes
+      - Preserved F1AP regression test infrastructure
+      
+    * PR #412: Documentation Updates (2026-01-02)
+      - Updated asn1c-usage.tex with recent enhancements
+      - Added documentation for ENCODING-CONTROL directives
+      
+    * PR #409: Circular Dependency Detection (2026-01-01, Later Reverted)
+      - Improved circular dependency detection
+      
+    * PR #408: Open Type Code Generation Fix (2026-01-01)
+      - Fixed Open Type code generation for SEQUENCE OF in IEEE 1609.2
+      
+    * PR #399: XER Encoding and Complex Threshold (2026-01-01)
+      - Fixed XER encoding issues
+      - Added -fcomplex-threshold=<N> command line parameter
+
+    2024-2025:
+    * PR #200: Compiler Warning Fix (2024-11-21)
+      - Fixed -Wsign-compare warning in BIT_STRING_jer
+      
+    * PR #199: Version Brackets in CHOICE Fix (2025-02-09)
+      - Fixed version brackets handling in CHOICE types per X.691
+      
+    * PR #193: JER Pure Hexadecimal OCTET STRINGs (2024-06-22)
+      - JER OCTET STRING decoder now only accepts pure hexadecimal characters
+      
+    * PR #192: JER BIT STRING Variable Size (2024-06-20)
+      - Added JER-specific constraints support
+      - Fixed BIT STRINGs with variable size per X.697
+      
+    * PR #185: Format Specifiers for 64-bit Integers (2024-03-26)
+      - Added proper format specifiers for (u)int64_t types
+      
+    * PR #182: Integer Tests Warnings Fix (2024-03-25)
+      - Fixed compiler warnings in integer tests
+      
+    * PR #181: GCC Warnings Fixes (2024-03-21)
+      - Fixed format specifier warnings including 32-bit systems
+      - Fixed _REENTRANT redefinition
+      - Fixed ntohl implicit declaration
+      - Fixed unused constants warnings with NDEBUG
+      
+    * PR #178: JER OBJECT IDENTIFIER Quotes (2024-02-15)
+      - Added missing quotation marks to OBJECT IDENTIFIER JER encoder/decoder
+      
+    * PR #177: INTEGER to 64-bit Native Methods (2024-02-11)
+      - Added INTEGER2int64() and INTEGER2uint64() functions
+      
+    * PR #176: APER INTEGER longs to intmaxs (2024-02-07)
+      - Converted long/unsigned long to intmax_t/uintmax_t for 32-bit compatibility
+      
+    * PR #174: Copy Operation (2024-02-04)
+      - Introduced asn_copy() for fast structure deep-copying without encoding/decoding overhead
+      
+    * PR #173: Update README with Supported Rules (2024-01-24)
+      - Declared BASIC/CANONICAL APER and JER as supported encoding rules
+      
+    * PR #172: Class Default Syntax Support (2024-02-02)
+      - Added support for CLASS default syntax per X.681
+      
+    * PR #170: Add -fprefix Option (2024-01-17)
+      - Added -fprefix=<PREFIX> command line option for generated types
+      
+    * PR #169: JER ASN_DEBUG Fixes (2024-01-23)
+      - Removed nonexistent variables from ASN_DEBUG macros
+
+    2023-2024:
+    * PR #166: .gitignore Improvements (2024-01-13)
+      - Added ignores for generated smoke tests
+      
+    * PR #164: OER OPEN TYPE Encoding Fix (2024-01-09)
+      - Fixed OER OPEN TYPE encoding per X.696
+      
+    * PR #163: APER CHOICE Signedness Cast (2024-01-07)
+      - Cast signed variable to unsigned in CHOICE decoder
+      
+    * PR #162: JER Unused Arguments Cleanup (2024-01-07)
+      - Removed unused arguments and variables from JER code
+      
+    * PR #161: JER Fall Through Comments (2023-12-26)
+      - Added missing fall through marker comments
+      
+    * PR #160: JER Minified JSON Option (2023-12-26)
+      - Added ATS_JER_MINIFIED for compact JSON output
+      
+    * PR #159: JER UTF-8 Escaped Unicodes (2023-12-25)
+      - UTF-8 control characters now encoded as escaped unicode
+      - Added decoding support for escaped unicode characters
+      
+    * PR #158: JER REAL Special Values Fix (2023-12-20)
+      - Fixed REAL special values (MINUS-INFINITY, PLUS-INFINITY, NOT-A-NUMBER, -0)
+      
+    * PR #157: APER Non-Negative Normally Small Numbers Fix (2023-12-20)
+      - Fixed aper_put_nsnnwn() and aper_get_nsnnwn()
+      - Introduced aper_get_constrained_whole_number() and aper_put_constrained_whole_number()
+      
+    * PR #156: JER SET Fix (2023-12-16)
+      - Fixed JER SET encoder to produce valid JSONs per X.697
+      - SET decoder can now decode elements in any order
+      
+    * PR #155: SEQUENCE_free/CHOICE_free Null Check (2023-12-16)
+      - Moved null pointer check before type descriptor access
+      
+    * PR #154: PER OPENTYPE Size Constraints (2023-12-16)
+      - Fixed PER encoding/decoding of OPENTYPE with size constraints
+      
+    * PR #153: JER Formatting Enhancements (2023-12-11)
+      - Enhanced JER encoder output formatting
+      
+    * PR #151: JER Unwrapped Root (2023-12-10)
+      - Removed wrapper object from JER encoding per X.697
+      - Added JSON-compliant string escapes
+      - Enabled randomized tests for JER
+      
+    * PR #150: JER OCTET STRING UTF-8 Quotes (2023-12-05)
+      - Added quotes to BMPString and UTF-8 based string types
+      
+    * PR #149: JER INTEGER/ENUMERATED Compliant Decoding (2023-12-03)
+      - INTEGER decoder only accepts JSON numbers per X.697
+      - ENUMERATED decoder only accepts JSON strings
+      - Separated ENUMERATED decoding logic to its own file
+      
+    * PR #148: JER GraphicString Missing Operation (2023-12-03)
+      - Added missing null element to GraphicString operators when JER disabled
+      
+    * PR #147: JER OCTET STRING Allow Empty (2023-12-03)
+      - Allows empty OCTET STRINGs in JER
+      
+    * PR #146: JER RELATIVE-OID Add Quotes (2023-12-03)
+      - Added missing quotation marks to RELATIVE-OID values
+      
+    * PR #145: JER NULL Fix (2023-11-30)
+      - Added null JSON token for NULL type per X.697
+      
+    * PR #144: JER Decoder (2023-11-29)
+      - Added JSON decoding support
+      
+    * PR #140: APER CHOICE Present Value Check (2023-11-14)
+      - Added check that CHOICE present value doesn't exceed elements count
+      
+    * PR #138: WITH SUCCESSORS/DESCENDANTS Support (2023-11-12)
+      - Added support for module imports with "WITH SUCCESSORS" and "WITH DESCENDANTS" per X.680 Amendment 1
+      
+    * PR #137: Continuous OCTET STRING JER String (2023-10-10)
+      - JER OCTET STRING now encoded as continuous hexadecimal JSON string per X.697
+      
+    * PR #136: Handling Windows Exception for JUNKTEST (2023-08-31)
+      - Fixed JUNKTEST for Windows where RAND_MAX = 0x7fff
+      
+    * PR #133: JER BIT STRING Quoted Hex (2023-10-06)
+      - Fixed JER BIT STRING to output quoted hex strings per X.697
+      
+    * PR #132: Pattern Rules for Makefiles (2023-09-01)
+      - Replaced old-fashioned suffix rules with modern pattern rules in example makefiles
+      
+    * PR #131: Version and Origin URL (2025-11-11)
+      - asn1c now includes version, commit hash, date, and origin URL in binary and generated sources
+      
+    * PR #128: Disable Stack Overflow Check with Asan (2023-05-05)
+      - Disabled ASN__STACK_OVERFLOW_CHECK when building with Asan enabled
+      
+    * PR #127: Fix Extensible CHOICE Decoding (2023-05-05)
+      - Fixed decoding error for extensible CHOICE types
+
+    2022:
+    * PR #115: SEQUENCE Constraint Check Fix (2022-11-18)
+      - Fixed bug where SEQUENCE constraint check returned early after checking only first field
+      
+    * PR #114: Rename ATS_BASIC_JER to ATS_JER (2022-11-04)
+      - Renamed ATS_BASIC_JER to ATS_JER (breaking change)
+      
+    * PR #111: Rebased OAI Changes (2022-11-01)
+      - Merged various improvements from OAI fork
+      
+    * PR #110: Fix JER SET OF Invalid Output (2022-10-24)
+      - Fixed JER SET OF to produce valid JSON
+      
+    * PR #109: Converter-example Output JER to Console (2022-11-01)
+      - Added JER to list of text formats for console output
+      
+    * PR #105: Brchiu First Two (2022-07-19)
+      - Merged first two commits from PR #103
+      
+    * PR #104: APER Fix Regression Decoding CHOICE (2022-07-19)
+      - Fixed regression reusing allocated sptr when decoding CHOICE
+      
+    * PR #101: APER Printf Formatting on 32-bit (2022-07-19)
+      - Fixed printf formatting for 32-bit architectures
+      
+    * PR #100: APER Cosmetic Whitespace Fix (2022-07-15)
+      - Fixed whitespace formatting in APER code
+      
+    * PR #97: APER Fix Encoding where need_eom=true (2022-07-12)
+      - Fixed several APER encoding cases where need_eom=true
+      
+    * PR #96: APER Fix Encoding OCTET_STRING Constrained Size (2022-07-12)
+      - Fixed APER encoding of OCTET_STRING with constrained size
+      
+    * PR #95: APER Decoder Fix Wrong Indentation (2022-07-11)
+      - Fixed indentation and gcc warning
+      
+    * PR #93: Several APER Encoding Tests & Fixes (2022-07-11)
+      - Added multiple APER encoding tests and fixes
+      
+    * PR #92: OPEN_TYPE Fix Encoding if ASN_DISABLE_JER_SUPPORT (2022-07-08)
+      - Fixed OPEN_TYPE encoding when JER support is disabled
+      
+    * PR #91: Fix APER Length Encoding Edge Case (2022-03-08)
+      - Fixed APER length encoding edge case
+      
+    * PR #90: APER Decoder Can Ignore Unparseable Open Types (2022-02-25)
+      - APER decoder can now ignore protocol extensions it cannot parse
+      
+    * PR #89: Fix Coredump Encoding Extensible Enumeration (2022-02-25)
+      - Fixed crash when encoding extensible enumeration in APER
+      
+    * PR #88: JER Support (2022-05-02)
+      - Added JER (JSON Encoding Rules) encoding support
+
+    2021:
+    * PR #86: Fix UPER Codec for INTEGER_t (2021-11-01)
+      - Fixed incorrect encoding of large integer values (>4 bytes) on 32-bit architectures
+      
+    * PR #84: MinGW Support (2021-09-21)
+      - Fixed format specifiers to use standard C header inttypes.h
+      - Fixed _snprintf vs snprintf for MinGW
+      - Removed enforced _GNU_SOURCE that broke MinGW build
+      
+    * PR #76: Fix Protect Dereferencing asn_per_constraint_t (2021-05-27)
+      - Added null-guard before accessing ct->{upper,lower}_bound
+
+    2020:
+    * PR #67: Disable Individual Codecs and Features (2020-09-23)
+      - Added -no-gen-BER, -no-gen-XER, -no-gen-OER, -no-gen-UPER, -no-gen-APER, -no-gen-print, -no-gen-random-fill flags
+      - Added asn_config.h file for codec/feature disabling
+      - Added stack overflow check bypass
+      - Added random() function availability check
+      
+    * PR #65: Fix vlm/asn1c#379 (2020-07-07)
+      - Bug fix
+
+    2019:
+    * PR #57: Various Fixes (2019-09-20)
+      - Empty fragment encoding
+      - Dereference DEFAULT to get actual value
+      - Fixed length bits for small fixed-sized sequence-of
+      - Index encoding in choice extensions
+      - Only align when range == 256
+      
+    * PR #54: PER Support Use intmax_t (2019-08-02)
+      - Changed from long to intmax_t for integer constraints to fix 32-bit issues
+      
+    * PR #51: Fix Compiler Redefinition Warnings (2019-08-02)
+      - Fixed compiler redefinition warnings for __EXTENSIONS__
+      
+    * PR #47: Fix for 32-bit Crossdev Environment Tests (2019-04-08)
+      - Fixed tests for 32-bit cross-development environments
+      
+    * PR #42: Merging Minor Security Fix (2019-01-22)
+      - Fixed buffer overrun in unber
+        (Severity: low; Security impact: high)
+
+    2018:
+    * PR #38: Add APER Encoder for SET_OF (2018-11-06)
+      - Added missing APER encoder for SET_OF type
+      
+    * PR #36: Add EXTERNAL Support (2018-09-12)
+      - Removed EXTERNAL from parser, added as ASN.1 definition
+      - Support for bison v3
+      - Added test case 159
+      
+    * PR #32: APER Fix Range Calculation (2018-03-05)
+      - Fixed range calculation when decoding constrained SEQUENCE OF/SET OF per X.691
+
+    2017:
+    * PR #26: Miscellaneous Changes (2017-05-22)
+      - Fixed premature pointer free in rare case
+      - Added parsing test results for information object class test cases
+      - Updated examples and Makefiles
+      - Fixed vlm/asn1c#144 by adding -D_DEFAULT_SOURCE to CFLAGS
+      
+    * PR #25: Fix Issue 24 (2017-05-22)
+      - Fixed inheritance of PER constraints
+      
+    * PR #23: Fix Most Memory Leakage (2017-05-05)
+      - Fixed memory leaks in asn1p_l.c and asn1p_y.c
+      
+    * PR #22: Fix vlm/asn1c#147 (2017-05-05)
+      - Rewrote _asn1f_parse_class_object_data() to use next literal token as delimiter
+      - Rewrote _asn1f_assign_cell_value() to use asn1p_parse_buffer()
+      - Now handles arbitrary direct values in class field settings
+      
+    * PR #19: Generate Code Coverage Report (2017-04-25)
+      - Added code coverage support with branch coverage
+      - Added -fno-skeletons-copy compiler flag
+      
+    * PR #18: Solve S1AP, RANAP and J2735 Problems (2017-05-02)
+      - Fixed issues found when processing S1AP, RANAP and J2735-201603
+      - Added support for duplicate type names in different modules
+      
+    * PR #17: Add LTE-RRC Example (2017-04-23)
+      - Added LTE-RRC example
+      
+    * PR #16: Fix Memory Leakage in asn1c (2017-04-22)
+      - Fixed memory leaks found by Valgrind
+      
+    * PR #15: Add OS X to Travis CI Builds (2017-04-19)
+      - Added macOS to Travis CI builds
+      
+    * PR #14: Fix REAL Constraints Part 2 (2017-04-19)
+      - Continued fixing REAL constraints
+      
+    * PR #13: Add REAL Constraint Support (2017-04-18)
+      - Added REAL constraint support per X.691
+      
+    * PR #12: Zero Out Memory When Free Content Only (2017-04-13)
+      - Zero out memory when calling free functions with contents_only = 1
+      
+    * PR #11: Replace op->free_struct with Macro for Branch 115 (2017-04-08)
+      - Replaced op->free_struct with ASN_STRUCT_FREE macros
+      
+    * PR #10: Replace op->free_struct with Macro for Master (2017-04-09)
+      - Replaced op->free_struct with ASN_STRUCT_FREE macros
+      
+    * PR #9: Fix Segfault with Null consume_bytes_cb (2017-04-07)
+      - Fixed segmentation fault when [au]per_encode called with null consume_bytes_cb
+      
+    * PR #8: OCTET STRING APER Encode/Decode Fixes (2017-03-29)
+      - Fixed OCTET STRING APER encoding/decoding issues
+      
+    * PR #7: Merge PR143 to 115 Branch (2017-04-07)
+      - Merged PR#143 from vlm repo to branch 115
+      
+    * PR #6: Fix NativeInteger DER/UPER/APER Encode (2017-03-28)
+      - Fixed NativeInteger encoding for DER, UPER and APER
+      
+    * PR #5: Add EXTERNAL Support #140 (2017-03-27)
+      - Support for bison v3
+      - Regenerate parser files on every compile
+      - Remove EXTERNAL from parser
+      - Add EXTERNAL ASN.1 definition
+      
+    * PR #4: V2 Fix Integer Encode/Decode on 32-bit (2017-03-22)
+      - Fixed integer encoding/decoding on 32-bit platforms
+      
+    * PR #3: Add EXTERNAL Support #140 (2017-03-28)
+      - Initial EXTERNAL support implementation
+      
+    * PR #2: Sync PR143 with master (2017-03-21)
+      - Synced PR#143 from vlm repo
+      
+    * PR #1: Fix Integer Encode/Decode on 32-bit (2017-03-22)
+      - Fixed integer encoding/decoding issues on 32-bit platforms
+
 0.9.40:
     FEATURES:
     * Added support for basic Information Object Sets driven code generation.
